@@ -1,77 +1,84 @@
-/* تنسيق عام للموقع */
+:root {
+    --bg-dark: #121212;
+    --card-bg: #1e1e1e;
+    --primary: #4caf50;
+    --text-main: #e0e0e0;
+    --text-dim: #999;
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
     margin: 0;
+    padding: 20px;
     direction: rtl;
 }
 
 .container {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    width: 90%;
     max-width: 500px;
-    text-align: center;
+    margin: 0 auto;
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
 }
 
-h1 { color: #2c3e50; margin-bottom: 5px; }
-p { color: #7f8c8d; margin-bottom: 25px; }
+header h1 { color: var(--primary); text-align: center; margin: 0; }
+header p { text-align: center; color: var(--text-dim); font-size: 0.9rem; }
 
-/* تنسيق حقول الإدخال */
-.input-section {
-    text-align: right;
-    display: flex;
-    flex-direction: column;
+/* إخفاء أسهم الأرقام */
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none; margin: 0;
 }
+input[type=number] { -moz-appearance: textfield; }
 
-label {
-    margin-top: 15px;
-    font-weight: bold;
-    color: #34495e;
-}
+.input-group { margin-top: 15px; text-align: right; }
+label { display: block; margin-bottom: 5px; color: var(--primary); font-weight: bold; }
 
 input, select {
+    width: 100%;
     padding: 12px;
-    margin-top: 5px;
-    border: 1px solid #ddd;
+    box-sizing: border-box;
+    background: #2a2a2a;
+    border: 1px solid #333;
     border-radius: 8px;
-    font-size: 16px;
+    color: white;
+    font-size: 1rem;
 }
 
-/* تنسيق الزر */
 button {
-    margin-top: 30px;
+    width: 100%;
     padding: 15px;
-    background-color: #27ae60;
-    color: white;
+    margin-top: 25px;
+    background: var(--primary);
     border: none;
     border-radius: 8px;
-    font-size: 18px;
+    color: white;
+    font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s;
+    font-size: 1.1rem;
 }
 
-button:hover {
-    background-color: #219150;
+.results-area { margin-top: 30px; border-top: 1px solid #333; padding-top: 20px; }
+
+.meal-box {
+    background: #252525;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    border-right: 4px solid var(--primary);
 }
 
-/* صندوق النتائج */
-.results-section {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #e8f5e9;
-    border-left: 5px solid #27ae60;
-    border-radius: 8px;
-    text-align: right;
+.category-label { color: var(--primary); font-weight: bold; margin-bottom: 10px; display: block; }
+
+.meal-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #333;
 }
 
-.result-item {
-    margin-bottom: 10px;
-    font-size: 18px;
-}
+.meal-item:last-child { border: none; }
+.meal-name { font-size: 0.95rem; }
+.meal-cals { color: var(--primary); font-size: 0.85rem; }
