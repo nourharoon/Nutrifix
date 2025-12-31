@@ -1,8 +1,8 @@
-/** * 1. قاعدة بيانات النظام الخبير (Knowledge Base)
- * تم إضافة خاصية 'amount' لتحديد كمية الطعام بدقة لكل وجبة.
+/**
+ * 1. قاعدة البيانات المدمجة (Internal Knowledge Base)
+ * تضمن عمل الموقع مباشرة دون الحاجة لطلبات خارجية.
  */
 const foodBank = [
-    // وجبات الفطور
     { 
         name: "لبنة، زيتون، خبز أسمر", 
         amount: "3 ملاعق لبنة، 5 حبات زيتون، رغيف خبز أسمر صغير",
@@ -27,7 +27,6 @@ const foodBank = [
         micros: "ألياف، مغنيسيوم، منغنيز",
         benefit: "إمداد الجسم بطاقة بطيئة الامتصاص طوال الصباح."
     },
-    // وجبات الغداء
     { 
         name: "مقلوبة دجاج وسلطة", 
         amount: "150غ صدر دجاج، 6 ملاعق أرز، كوب سلطة خضراء",
@@ -52,7 +51,6 @@ const foodBank = [
         micros: "فيتامين B6، نياسين، زنك",
         benefit: "مثالي لبناء الكتلة العضلية وزيادة الاستقلاب."
     },
-    // وجبات العشاء
     { 
         name: "شوربة عدس بالليمون", 
         amount: "زبدية كبيرة (300 مل)، شريحة توست محمص واحدة",
@@ -80,7 +78,7 @@ const foodBank = [
 ];
 
 /**
- * 2. محرك البحث الذكي (Matching Engine)
+ * 2. محرك الاختيار (Filtering & Sorting Engine)
  */
 function getBestOptions(target, type) {
     return foodBank
@@ -90,7 +88,7 @@ function getBestOptions(target, type) {
 }
 
 /**
- * 3. دالة معالجة البيانات وعرض النتائج
+ * 3. المعالجة وعرض التقارير
  */
 function processData() {
     const weight = parseFloat(document.getElementById('weight').value);
@@ -113,10 +111,10 @@ function processData() {
 
     document.getElementById('stats-summary').innerHTML = `
         <div class="meal-box" style="border:none; background: rgba(76, 175, 80, 0.1); text-align:right;">
-            <h4 style="color:#4caf50; margin:0 0 10px 0;">📊 تحليل الاحتياج اليومي:</h4>
+            <h4 style="color:#4caf50; margin:0 0 10px 0;">📊 التقرير الحيوي المستخلص:</h4>
             <div style="font-size:0.9rem; line-height:1.7;">
                 • مؤشر كتلة الجسم (BMI): <strong>${bmi.toFixed(1)}</strong><br>
-                • السعرات المستهدفة: <strong>${target} سعرة</strong>
+                • الاحتياج اليومي المستهدف: <strong>${target} سعرة</strong>
                 <hr style="border:0; border-top:1px solid #333; margin:10px 0;">
                 <strong>🥩 توزيع المغذيات الكبرى:</strong><br>
                 البروتين: ${proteinGrams}g | الكربوهيدرات: ${carbGrams}g | الدهون: ${fatGrams}g
@@ -125,9 +123,9 @@ function processData() {
     `;
 
     const categories = [
-        { title: "خيارات الفطور", data: getBestOptions(target * 0.25, "breakfast") },
-        { title: "خيارات الغداء", data: getBestOptions(target * 0.45, "lunch") },
-        { title: "خيارات العشاء", data: getBestOptions(target * 0.30, "dinner") }
+        { title: "🍳 مقترحات الفطور (25%)", data: getBestOptions(target * 0.25, "breakfast") },
+        { title: "🍱 مقترحات الغداء (45%)", data: getBestOptions(target * 0.45, "lunch") },
+        { title: "🥗 مقترحات العشاء (30%)", data: getBestOptions(target * 0.30, "dinner") }
     ];
 
     let outputHTML = "";
@@ -135,17 +133,17 @@ function processData() {
         outputHTML += `<div class="meal-box"><span class="category-label">${cat.title}</span>`;
         cat.data.forEach(meal => {
             outputHTML += `
-                <div class="meal-item" style="flex-direction: column; align-items: flex-start; padding: 12px 0; border-bottom: 1px dashed #444;">
+                <div class="meal-item">
                     <div style="display: flex; justify-content: space-between; width: 100%;">
-                        <span class="meal-name" style="color:#4caf50; font-weight:bold;">${meal.name}</span>
-                        <span class="meal-cals">${meal.cals} سعرة</span>
+                        <span style="color:#4caf50; font-weight:bold;">${meal.name}</span>
+                        <span style="color:var(--primary); font-size:0.85rem;">${meal.cals} سعرة</span>
                     </div>
-                    <div style="font-size: 0.85rem; color: #fff; margin-top: 6px; background: #333; padding: 5px; border-radius: 5px; width: 100%; box-sizing: border-box;">
-                        <strong>⚖️ الكمية المقترحة:</strong> ${meal.amount}
+                    <div style="font-size: 0.85rem; color: #fff; margin: 8px 0; background: #333; padding: 6px; border-radius: 5px;">
+                        <strong>⚖️ الكمية:</strong> ${meal.amount}
                     </div>
-                    <div style="font-size: 0.8rem; color: #bbb; margin-top: 6px;">
-                        <strong>📐 المغذيات الكبرى:</strong> ${meal.macros} <br>
-                        <strong>🔬 العناصر الصغرى:</strong> ${meal.micros} <br>
+                    <div style="font-size: 0.8rem; color: #bbb;">
+                        <strong>📐 المغذيات:</strong> ${meal.macros} <br>
+                        <strong>🔬 العناصر:</strong> ${meal.micros} <br>
                         <p style="color:#81c784; margin: 5px 0 0 0;">✨ <em>${meal.benefit}</em></p>
                     </div>
                 </div>`;

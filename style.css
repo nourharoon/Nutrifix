@@ -24,10 +24,9 @@ body {
     box-shadow: 0 5px 20px rgba(0,0,0,0.3);
 }
 
-header h1 { color: var(--primary); text-align: center; margin: 0; }
-header p { text-align: center; color: var(--text-dim); font-size: 0.9rem; }
+header h1 { color: var(--primary); text-align: center; margin: 0; font-size: 1.8rem; }
+header p { text-align: center; color: var(--text-dim); font-size: 0.9rem; margin-top: 10px; }
 
-/* إخفاء أسهم الأرقام */
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     -webkit-appearance: none; margin: 0;
 }
@@ -58,7 +57,10 @@ button {
     font-weight: bold;
     cursor: pointer;
     font-size: 1.1rem;
+    transition: 0.3s;
 }
+
+button:hover { background: #45a049; }
 
 .results-area { margin-top: 30px; border-top: 1px solid #333; padding-top: 20px; }
 
@@ -74,11 +76,9 @@ button {
 
 .meal-item {
     display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid #333;
+    flex-direction: column;
+    padding: 12px 0;
+    border-bottom: 1px dashed #444;
 }
 
 .meal-item:last-child { border: none; }
-.meal-name { font-size: 0.95rem; }
-.meal-cals { color: var(--primary); font-size: 0.85rem; }
