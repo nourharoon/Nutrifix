@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>NutriFix | أخصائي التغذية الذكي</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>نُـوتـريـفـيكس (NutriFix)</h1>
+        <p>نظام خبير لإصلاح الجسم بالغذاء</p>
+
+        <section class="input-section">
+            <label>الوزن (كغ):</label>
+            <input type="number" id="weight" placeholder="مثال: 70">
+
+            <label>الطول (سم):</label>
+            <input type="number" id="height" placeholder="مثال: 170">
+
+            <label>العمر:</label>
+            <input type="number" id="age" placeholder="مثال: 25">
+
+            <label>الجنس:</label>
+            <select id="gender">
+                <option value="male">ذكر</option>
+                <option value="female">أنثى</option>
+            </select>
+
+            <label>مستوى النشاط:</label>
+            <select id="activity">
+                <option value="1.2">خامل (لا يوجد تمارين)</option>
+                <option value="1.375">نشاط خفيف (1-3 أيام)</option>
+                <option value="1.55">نشاط متوسط (3-5 أيام)</option>
+            </select>
+
+            <button onclick="calculate()">تحليل البيانات ذكياً</button>
+        </section>
+
+        <section id="results" class="results-section" style="display:none;">
+            <h2>النتيجة التحليلية:</h2>
+            <div id="bmi-result"></div>
+            <div id="calories-result"></div>
+            <div id="meal-plan"></div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
